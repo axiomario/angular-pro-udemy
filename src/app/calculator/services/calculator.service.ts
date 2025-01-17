@@ -41,6 +41,10 @@ export class CalculatorService {
             this.result.update(result => `${ Number(result) * -1 }`);
         }
 
+        if (value === '%') {
+            this.result.update(result => `${ Number(result) / 100 }`);
+        }
+
         if (value === '=') {
             this.operate();
             this.clearMemory();
