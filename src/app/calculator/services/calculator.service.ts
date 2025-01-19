@@ -1,7 +1,8 @@
 import { Injectable, signal } from '@angular/core';
+import { ICalculatorService } from './calculator.service.interface';
 
 @Injectable({providedIn: 'root'})
-export class CalculatorService {
+export class CalculatorService implements ICalculatorService {
     public result = signal('0');
     public subresult = signal('');
     public operator = signal('');
@@ -10,7 +11,7 @@ export class CalculatorService {
 
     constructor() { }
     
-    public processValue(value: string) {
+    public processValue(value: string): void {
         if (this.numbers.includes(value)) {
             if (this.result() === '0') {
                 this.result.set(value);

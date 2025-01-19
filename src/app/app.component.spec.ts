@@ -26,11 +26,13 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     const app = fixture.componentInstance;
+
     expect(app).toBeTruthy();
   });
 
   it(`should have the 'angular-pro-udemy' title`, () => {
     const app = fixture.componentInstance;
+
     expect(app.title).toEqual('angular-pro-udemy');
   });
 
@@ -40,6 +42,7 @@ describe('AppComponent', () => {
 
   it('should use flexbox', () => {
     const initialDiv = compiled.querySelector('div');
+    
     expect(initialDiv).toBeTruthy();
     expect(initialDiv?.classList.value.includes('flex')).toBeTrue();
   });
