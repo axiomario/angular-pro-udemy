@@ -1,0 +1,17 @@
+@if (pokemon()) {
+    @let myPokemon = pokemon()!;
+    <section class="flex flex-col justify-content">
+        <div class="flex justify-center">
+            <h1 class="text-4xl font-bold capitalize my-5">{{ myPokemon.name }}</h1>
+        </div>
+    </section>
+    <section class="flex flex-col justify-content items-center w-full">
+        <img class="w-64 h-64"
+            [src]="pokemon()!.sprites.other?.['official-artwork']?.front_default"/>
+        @if (myPokemon.cries.latest) {
+            <audio controls>
+                <source [src]="myPokemon.cries.latest" type="audio/wav"/>
+            </audio>
+        }
+    </section>
+}

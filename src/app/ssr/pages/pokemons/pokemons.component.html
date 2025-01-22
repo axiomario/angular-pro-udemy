@@ -1,0 +1,16 @@
+<div class="bg-slate-800 text-white flex justify-center">
+    <div class="max-w-screen-lg">
+        <h1 class="text-3xl">Pokemon list</h1>
+        <h2 class="text-xl">Current page: {{ currentPage() }}</h2>
+        <hr class="my-2">
+        @if (!isLoading()) {
+            <pokemon-list [pokemons]="pokemons()"></pokemon-list>
+        } @else {
+            <pokemon-list-skeleton></pokemon-list-skeleton>
+        }
+        <div class="flex justify-between mt-4">
+            <button class="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 px-3 py-1 rounded-md" (click)="updatePage(-1)">Previous</button>
+            <button class="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 px-3 py-1 rounded-md" (click)="updatePage(+1)">Next</button>
+        </div>
+    </div>
+</div>
