@@ -20,8 +20,8 @@ export default class PokemonsComponent implements OnInit, OnDestroy {
     public isLoading = signal(true);
     private _activatedRoute = inject(ActivatedRoute); 
     public currentPage = toSignal<number>(
-        this._activatedRoute.queryParamMap.pipe(
-            map(params => params.get('page')),
+        this._activatedRoute.params.pipe(
+            map(params => params['page'] ?? 0),
             map(page => !page || isNaN(parseInt(page)) ? 0 : parseInt(page)),
             map(page => Math.max(page, 0))
         )
@@ -31,7 +31,7 @@ export default class PokemonsComponent implements OnInit, OnDestroy {
         console.log('isStable', isStable);
     });
 
-    logEffect = effect(() => {
+    loadOnPageChanged = effect(() => {
         console.log('Page changed:', this.currentPage());
         this.loadPokemons();
     }, { allowSignalWrites: true });
@@ -57,6 +57,6 @@ export default class PokemonsComponent implements OnInit, OnDestroy {
     public updatePage(value: number): void {
         const page = Math.max((this.currentPage() || 0) + value, 0);
 
-        this._router.navigate([], { queryParams: { page } });
+        this._router.navigate(['./../', page], { relativeTo: this._activatedRoute });
     }
 }

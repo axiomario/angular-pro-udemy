@@ -20,7 +20,7 @@ export class PokemonService {
         );
     }
 
-    public loadPokemon(id: number): Observable<Pokemon> {
+    public loadPokemon(id: number | string): Observable<Pokemon> {
         return this.httpClient.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${ id }`);
     }
     

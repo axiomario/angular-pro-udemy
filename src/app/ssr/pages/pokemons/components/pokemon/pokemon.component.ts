@@ -15,9 +15,9 @@ export default class PokemonComponent implements OnInit {
     public pokemon = signal<Pokemon | null>(null);
 
     constructor(private _pokemonService: PokemonService, private _activatedRoute: ActivatedRoute) {
-        const id = Number(this._activatedRoute.snapshot.paramMap.get('id'));
+        const name = this._activatedRoute.snapshot.paramMap.get('id') || '';
         
-        this._pokemonService.loadPokemon(id).subscribe(data => {
+        this._pokemonService.loadPokemon(name).subscribe(data => {
             console.log(data);
             this.pokemon.set(data);
         });
