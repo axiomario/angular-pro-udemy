@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { Pokemon, PokemonResponse, SimplePokemon } from '../interfaces';
 
 @Injectable({providedIn: 'root'})
@@ -9,7 +9,7 @@ export class PokemonService {
 
     public loadPage(page: number): Observable<SimplePokemon[]> {
         const size = 20;
-        
+
         return this.httpClient.get<PokemonResponse>(
             `https://pokeapi.co/api/v2/pokemon?offset=${ Math.max(page, 0) * size }&limit=${ size }`
         ).pipe(
@@ -21,7 +21,9 @@ export class PokemonService {
     }
 
     public loadPokemon(id: number | string): Observable<Pokemon> {
-        return this.httpClient.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${ id }`);
+        return this.httpClient.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${ id }`).pipe(
+          catchError(error => throwError(() => new Error(error.error ?? 'An error occurred')))
+        );
     }
-    
+
 }

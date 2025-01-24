@@ -11,9 +11,9 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [
-        { 
-          provide: ActivatedRoute, 
-          useValue: { 
+        {
+          provide: ActivatedRoute,
+          useValue: {
             snapshot: { paramMap: of(new Map()) }
           }
         }
@@ -42,7 +42,7 @@ describe('AppComponent', () => {
 
   it('should use flexbox', () => {
     const initialDiv = compiled.querySelector('div');
-    
+
     expect(initialDiv).toBeTruthy();
     expect(initialDiv?.classList.value.includes('flex')).toBeTrue();
   });

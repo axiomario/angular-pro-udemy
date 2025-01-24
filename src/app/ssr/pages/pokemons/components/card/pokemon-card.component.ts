@@ -14,7 +14,7 @@ export class PokemonCardComponent implements OnInit {
     public readonly image = computed(() => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${ this.pokemon().id }.png`);
 
     logEffect = effect(() => {
-        console.log('PokemonCard:', this.pokemon());
+        //console.log('PokemonCard:', this.pokemon());
     });
 
     constructor() { }

@@ -12,6 +12,7 @@ import { SimplePokemon } from '../../interfaces';
 
 export class PokemonListComponent implements OnInit {
     public pokemons = input.required<SimplePokemon[]>();
+
     constructor() { }
 
     ngOnInit() { }
