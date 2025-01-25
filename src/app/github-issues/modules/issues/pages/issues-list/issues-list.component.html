@@ -1,0 +1,32 @@
+<h1>GitHub Issues</h1>
+<div class="my-5 border-b-2 border-blue-500"></div>
+
+<section class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+  <div class="flex flex-col col-span-3">
+    <div class="flex gap-2">
+      <button class="btn active">All</button>
+      <button class="btn">Open</button>
+      <button class="btn">Closed</button>
+    </div>
+  </div>
+
+  <div class="mt-4 flex flex-col col-span-2">
+    @if (issuesQuery.isLoading()) {
+      <p>Loading...</p>
+    } @else {
+      @for (issue of issuesQuery.data(); track issue.id) {
+        <issue-item [issue]="issue"></issue-item>
+      } @empty {
+        <p>There are no issues</p>
+      }
+    }
+  </div>
+
+  <div>
+    @if (labelsQuery.isLoading()) {
+      <p>Loading...</p>
+    } @else {
+      <issues-labels [labels]="labelsQuery.data() ?? []"></issues-labels>
+    }
+  </div>
+</section>
