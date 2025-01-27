@@ -1,9 +1,10 @@
 import { Component, input, OnInit } from '@angular/core';
 import { GitHubIssue } from '../../interfaces';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
     standalone: true,
-    imports: [],
+    imports: [MarkdownModule],
     selector: 'issue-comment',
     templateUrl: 'issue-comment.component.html'
 })
