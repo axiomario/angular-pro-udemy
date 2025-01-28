@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { IssuesService } from '../../services/issues.service';
 import { CommonModule } from '@angular/common';
 import { IssuesLabelsComponent } from "../../components/issues-labels/issues-labels.component";
 import { IssueItemComponent } from "../../components/issue-item/issue-item.component";
+import { State } from '../../interfaces';
 
 @Component({
   standalone: true,
@@ -16,6 +17,10 @@ import { IssueItemComponent } from "../../components/issue-item/issue-item.compo
 })
 
 export default class IssuesListComponent implements OnInit {
+  public all = computed(() => this._issuesService.selectedState() === State.All);
+  public open = computed(() => this._issuesService.selectedState() === State.Open);
+  public closed = computed(() => this._issuesService.selectedState() === State.Closed);
+
   constructor(private _issuesService: IssuesService) { }
 
   ngOnInit() { }
@@ -26,5 +31,15 @@ export default class IssuesListComponent implements OnInit {
 
   public get issuesQuery() {
     return this._issuesService.issuesQuery;
+  }
+
+  onChangeState(newState: string): void {
+    const state = {
+      'all': State.All,
+      'open': State.Open,
+      'closed': State.Closed
+    }[newState] ?? State.All;
+
+    this._issuesService.showIssuesByState(state);
   }
 }

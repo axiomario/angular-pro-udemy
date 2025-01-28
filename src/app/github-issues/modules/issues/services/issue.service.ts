@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import { injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { getIssueById, getIssueComments } from '../actions';
+import { GitHubIssue } from '../interfaces';
 
 @Injectable({providedIn: 'root'})
 export class IssueService {
@@ -18,9 +19,21 @@ export class IssueService {
         enabled: this.issueId() !== null
     }));
 
-    constructor() { }
+    constructor(private _queryClient: QueryClient) { }
 
     setIssueId(issueId: string): void {
         this.issueId.set(issueId);
+    }
+
+    prefetchIssue(issueId: string): void {
+        this._queryClient.prefetchQuery({
+            queryKey: ['issue', issueId],
+            queryFn: () => getIssueById(issueId),
+            staleTime: 1000 * 60 * 5
+        });
+    }
+
+    setIssueData(issue: GitHubIssue): void {
+        this._queryClient.setQueryData(['issue', issue.number.toString()], issue);
     }
 }

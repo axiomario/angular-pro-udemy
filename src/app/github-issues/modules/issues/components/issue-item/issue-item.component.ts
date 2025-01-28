@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input, OnInit } from '@angular/core';
 import { GitHubIssue, State } from '../../interfaces';
 import { RouterLink } from '@angular/router';
+import { IssueService } from '../../services/issue.service';
 
 @Component({
   selector: 'issue-item',
@@ -16,7 +17,7 @@ import { RouterLink } from '@angular/router';
 export class IssueItemComponent implements OnInit {
   public issue = input.required<GitHubIssue>();
 
-  constructor() { }
+  constructor(private _issueService: IssueService) { }
 
   ngOnInit() { }
 
@@ -26,5 +27,10 @@ export class IssueItemComponent implements OnInit {
 
   public get since(): string {
     return '';
+  }
+
+  public prefetchData(): void {
+    //this._issueService.prefetchIssue(this.issue().number.toString());
+    this._issueService.setIssueData(this.issue());
   }
 }
