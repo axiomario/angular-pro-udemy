@@ -6,7 +6,7 @@ const BASE_URL = environment.baseUrl;
 const GITHUB_TOKEN = environment.githubToken;
 
 export const getIssueById = async (id: string): Promise<GitHubIssue> => {
-  await sleep(2);
+  //await sleep(2);
   try {
     const resp = await fetch(`${ BASE_URL }/issues/${ id }`, {
       headers: {

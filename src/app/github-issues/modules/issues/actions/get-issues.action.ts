@@ -16,7 +16,7 @@ export const getIssues = async (
     params.append('labels', selectedLabels.join(','));
   }
 
-  await sleep(2);
+  //await sleep(2);
   try {
     const resp = await fetch(`${ BASE_URL }/issues?${ params }`, {
       headers: {
